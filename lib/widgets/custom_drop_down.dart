@@ -6,14 +6,12 @@ class CustomDropdown extends StatelessWidget {
   CustomDropdown({required this.selectedCategory, required this.onChanged});
 
   final List<String> categories = const [
+    "All",
     "Electronics",
-    "Books & Notes",
+    "Books",
     "Furniture",
-    "Clothing",
-    "Accessories",
-    "Sports & Fitness",
+    "Sports",
     "Gaming",
-    "Gadgets",
     "Others",
   ];
 
