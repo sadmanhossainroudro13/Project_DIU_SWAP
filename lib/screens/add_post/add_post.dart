@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:project_diu_swap/services/cloudinary_service.dart';
 import 'package:project_diu_swap/widgets/bold_text.dart';
 import 'package:project_diu_swap/widgets/customButton.dart';
-import 'package:project_diu_swap/widgets/custom_drop_down.dart';
-import 'package:project_diu_swap/widgets/custom_textfield.dart';
+import 'package:project_diu_swap/screens/add_post/widgets/custom_drop_down.dart';
+import 'package:project_diu_swap/screens/add_post/widgets/custom_textfield.dart';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:project_diu_swap/widgets/upload_photo_widget.dart';
+import 'package:project_diu_swap/screens/add_post/widgets/upload_photo_widget.dart';
 
 class AddPost extends StatefulWidget {
   const AddPost({super.key});
@@ -53,7 +53,9 @@ class _AddPostState extends State<AddPost> {
     if (title.isEmpty ||
         location.isEmpty ||
         images.isEmpty ||
-        selectedCategory == null) {
+        selectedCategory == null ||
+        price == null ||
+        phoneNumber == null) {
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text("Pleas fill all required fields")));
@@ -89,6 +91,17 @@ class _AddPostState extends State<AddPost> {
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text("Post Uploaded Successfully")));
+
+      _titleController.clear();
+      _priceController.clear();
+      _locationController.clear();
+      _descriptionController.clear();
+      _phoneNumberController.clear();
+
+      setState(() {
+        images.clear();
+        selectedCategory = null;
+      });
     } catch (e) {
       print("Error: $e");
 
@@ -186,12 +199,13 @@ class _AddPostState extends State<AddPost> {
               CustomTexField(
                 controller: _phoneNumberController,
                 keyboardType: TextInputType.number,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 hint: "Enter contact number",
               ),
 
               SizedBox(height: 5),
 
-              //PostAdd
+              //PostAdd Button
               isLoading
                   ? Center(child: CircularProgressIndicator())
                   : Custombutton(

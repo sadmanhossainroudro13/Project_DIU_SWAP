@@ -14,17 +14,13 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
         child: Image.asset("assets/images/logo.png", height: 120),
       ),
       backgroundColor: Colors.black87,
-
       actions: [
         Padding(
           padding: const EdgeInsets.fromLTRB(0, 10, 20, 0),
-          child: IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.notifications_outlined,
-              color: Colors.white,
-              size: 30,
-            ),
+          child: Icon(
+            Icons.notifications_outlined,
+            color: Colors.white,
+            size: 30,
           ),
         ),
       ],

@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'bold_text.dart';
+import '../../../widgets/bold_text.dart';
 
 class LatestListingCard extends StatelessWidget {
   String selectedCategory;
@@ -10,7 +10,6 @@ class LatestListingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      //stream: FirebaseFirestore.instance.collection("posts").snapshots(),
       stream: selectedCategory == "All"
           ? FirebaseFirestore.instance
                 .collection('posts')
@@ -66,6 +65,8 @@ class LatestListingCard extends StatelessWidget {
                         height: 150,
                         width: double.infinity,
                         fit: BoxFit.cover,
+                        cacheWidth: 400,
+                        cacheHeight: 400,
                         errorBuilder: (context, error, StackTrace) {
                           return Container(
                             height: 150,

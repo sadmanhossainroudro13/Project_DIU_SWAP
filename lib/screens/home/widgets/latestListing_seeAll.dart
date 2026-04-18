@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'bold_text.dart';
+import '../../../widgets/bold_text.dart';
 
 class LatestlistingSeeall extends StatelessWidget {
   final String str;
