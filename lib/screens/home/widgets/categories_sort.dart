@@ -11,8 +11,10 @@ class CategoriesSort extends StatelessWidget {
     {"name": "Others", "icon": Icons.category},
   ];
 
+  String selectedCategory;
+
   final Function(String) onTap;
-  CategoriesSort({required this.onTap});
+  CategoriesSort({required this.onTap, required this.selectedCategory});
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +25,7 @@ class CategoriesSort extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: categories.length,
         itemBuilder: (context, index) {
+          bool isSelected = categories[index]['name'] == selectedCategory;
           return GestureDetector(
             onTap: () {
               onTap(categories[index]['name']);
@@ -42,7 +45,9 @@ class CategoriesSort extends StatelessWidget {
                     child: Icon(
                       categories[index]['icon'],
                       size: 35,
-                      color: const Color.fromARGB(255, 61, 189, 65),
+                      color: isSelected
+                          ? const Color.fromARGB(255, 61, 189, 65)
+                          : Colors.grey[600],
                     ),
                   ),
 

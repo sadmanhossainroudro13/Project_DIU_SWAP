@@ -4,8 +4,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../../widgets/bold_text.dart';
 
 class LatestListingCard extends StatelessWidget {
-  String selectedCategory;
-  LatestListingCard({required this.selectedCategory});
+  final String selectedCategory;
+  final String searchQuery;
+  final String filterCategory;
+  final bool isTrue;
+  LatestListingCard({
+    required this.selectedCategory,
+    required this.searchQuery,
+    this.filterCategory = "createdAt",
+    this.isTrue = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +38,13 @@ class LatestListingCard extends StatelessWidget {
         }
 
         var posts = snapshot.data!.docs;
+
+        if (searchQuery.isNotEmpty) {
+          posts = posts.where((post) {
+            String title = post['title'].toString().toLowerCase();
+            return title.contains(searchQuery.toLowerCase());
+          }).toList();
+        }
 
         return GridView.builder(
           //this stop scroll error

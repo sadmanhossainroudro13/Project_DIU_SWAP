@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:project_diu_swap/screens/home/widgets/search_bar.dart';
 import 'package:project_diu_swap/widgets/bold_text.dart';
 import 'package:project_diu_swap/screens/home/widgets/categories_sort.dart';
 import 'package:project_diu_swap/screens/home/widgets/home_appbar.dart';
@@ -15,6 +16,7 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   String selectedCategory = "All";
+  String searchQuery = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,9 +27,28 @@ class _HomepageState extends State<Homepage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Row(
+                children: [
+                  //Search bar
+                  Expanded(
+                    child: CustomSearch(
+                      searchFunction: (value) {
+                        setState(() {
+                          searchQuery = value;
+                        });
+                      },
+                    ),
+                  ),
+
+                  IconButton(onPressed: () {}, icon: Icon(Icons.filter_alt)),
+                ],
+              ),
+
               LatestlistingSeeall(str: "Categories"),
+
               //Category Section
               CategoriesSort(
+                selectedCategory: selectedCategory,
                 onTap: (value) {
                   setState(() {
                     selectedCategory = value;
@@ -39,7 +60,10 @@ class _HomepageState extends State<Homepage> {
               LatestlistingSeeall(str: "Latest Listing"),
 
               //Latese Listing Card
-              LatestListingCard(selectedCategory: selectedCategory),
+              LatestListingCard(
+                selectedCategory: selectedCategory,
+                searchQuery: searchQuery,
+              ),
             ],
           ),
         ),

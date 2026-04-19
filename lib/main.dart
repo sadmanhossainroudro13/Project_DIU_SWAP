@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:project_diu_swap/login_screen.dart';
 import 'package:project_diu_swap/screens/main_screen.dart';
+import 'package:project_diu_swap/screens/signup_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,7 +15,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false, home: MainScreen());
+    return MaterialApp(debugShowCheckedModeBanner: false, home: SignupScreen());
   }
 }

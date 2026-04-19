@@ -220,4 +220,16 @@ class _AddPostState extends State<AddPost> {
       ),
     );
   }
+
+  //Disposing controller to avoid memory leak
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _priceController.dispose();
+    _locationController.dispose();
+    _descriptionController.dispose();
+    _phoneNumberController.dispose();
+
+    super.dispose();
+  }
 }
