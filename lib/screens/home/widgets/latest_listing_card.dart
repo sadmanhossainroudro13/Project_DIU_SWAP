@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:project_diu_swap/screens/home/widgets/product_details.dart';
 import '../../../widgets/bold_text.dart';
 
 class LatestListingCard extends StatelessWidget {
@@ -61,59 +62,72 @@ class LatestListingCard extends StatelessWidget {
           itemBuilder: (context, index) {
             var post = posts[index];
 
-            return Container(
-              padding: EdgeInsets.symmetric(horizontal: 2, vertical: 2),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)],
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 2),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.network(
-                        post["images"][0],
-                        height: 150,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                        cacheWidth: 400,
-                        cacheHeight: 400,
-                        errorBuilder: (context, error, StackTrace) {
-                          return Container(
-                            height: 150,
-                            color: Colors.grey,
-                            child: Icon(Icons.broken_image),
-                          );
-                        },
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => ProductDetails(post: post.data()),
+                  ),
+                );
+              },
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)],
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 2),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.network(
+                          post["images"][0],
+                          height: 150,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                          cacheWidth: 400,
+                          cacheHeight: 400,
+                          errorBuilder: (context, error, StackTrace) {
+                            return Container(
+                              height: 150,
+                              color: Colors.grey,
+                              child: Icon(Icons.broken_image),
+                            );
+                          },
+                        ),
                       ),
                     ),
-                  ),
 
-                  //Titile inside card
-                  Text(
-                    post['title'],
-                    maxLines: 1,
+                    //Titile inside card
+                    Text(
+                      post['title'],
+                      maxLines: 1,
 
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-                  ),
-                  //price in card
-                  BoldText(
-                    str: "৳ ${post['price']}",
-                    fontSize: 15,
-                    color: Colors.green,
-                    bottom: 0,
-                  ),
-                  //location
-                  Text(
-                    post["location"],
-                    maxLines: 2,
-                    style: TextStyle(color: Colors.black87, fontSize: 12),
-                  ),
-                ],
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    //price in card
+                    BoldText(
+                      str: "৳ ${post['price']}",
+                      fontSize: 15,
+                      color: Colors.green,
+                      bottom: 0,
+                    ),
+                    //location
+                    Text(
+                      post["location"],
+                      maxLines: 2,
+                      style: TextStyle(color: Colors.black87, fontSize: 12),
+                    ),
+                  ],
+                ),
               ),
             );
           },

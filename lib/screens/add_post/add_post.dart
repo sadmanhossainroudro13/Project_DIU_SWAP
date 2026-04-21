@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +6,7 @@ import 'package:project_diu_swap/services/cloudinary_service.dart';
 import 'package:project_diu_swap/widgets/bold_text.dart';
 import 'package:project_diu_swap/widgets/customButton.dart';
 import 'package:project_diu_swap/screens/add_post/widgets/custom_drop_down.dart';
-import 'package:project_diu_swap/screens/add_post/widgets/custom_textfield.dart';
+import 'package:project_diu_swap/widgets/custom_textfield.dart';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:project_diu_swap/screens/add_post/widgets/upload_photo_widget.dart';
@@ -86,6 +87,8 @@ class _AddPostState extends State<AddPost> {
         "phoneNumber": phoneNumber,
         "images": imageUrls,
         "createdAt": Timestamp.now(),
+        "userId": FirebaseAuth.instance.currentUser!.uid,
+        "userEmail": FirebaseAuth.instance.currentUser!.email,
       });
 
       ScaffoldMessenger.of(
@@ -185,6 +188,7 @@ class _AddPostState extends State<AddPost> {
                 hint: "YKSG hall-1, Daffodil International University",
                 maxLines: 1,
               ),
+
               //Description
               BoldText(str: "Description"),
 

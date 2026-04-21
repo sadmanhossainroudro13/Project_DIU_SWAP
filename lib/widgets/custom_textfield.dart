@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-
 class CustomTexField extends StatelessWidget {
   final TextEditingController controller;
   final String hint;
