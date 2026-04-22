@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:project_diu_swap/screens/home/widgets/product_details.dart';
+import 'package:project_diu_swap/screens/home/product_details.dart';
 import '../../../widgets/bold_text.dart';
 
 class LatestListingCard extends StatelessWidget {

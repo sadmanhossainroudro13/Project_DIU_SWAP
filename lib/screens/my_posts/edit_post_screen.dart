@@ -37,7 +37,7 @@ class _EditPostScreenState extends State<EditPostScreen> {
             "title": _titleController.text,
             "price": int.parse(_priceController.text),
             "description": _descController.text,
-            "phoneNumber": int.parse(_phoneController.text),
+            "phoneNumber": _phoneController.text.trim(),
           });
 
       ScaffoldMessenger.of(

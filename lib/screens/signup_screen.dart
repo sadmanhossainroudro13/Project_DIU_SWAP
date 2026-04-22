@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:project_diu_swap/widgets/custom_textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -63,6 +64,14 @@ class _SignupScreenState extends State<SignupScreen> {
       //firebase setup
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
+
+      //Saving info of user
+      String uid = userCredential.user!.uid;
+
+      await FirebaseFirestore.instance.collection('users').doc(uid).set({
+        "name": name,
+        "email": email,
+      });
 
       //email verifiaction
       await userCredential.user!.sendEmailVerification();

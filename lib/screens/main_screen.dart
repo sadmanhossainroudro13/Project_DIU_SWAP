@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_diu_swap/screens/add_post/add_post.dart';
 import 'package:project_diu_swap/screens/home/home_page.dart';
 import 'package:project_diu_swap/screens/my_posts/my_post.dart';
-import 'package:project_diu_swap/screens/profile_screen.dart';
+import 'package:project_diu_swap/screens/profile_page/profile_screen.dart';
 import 'package:project_diu_swap/widgets/custom_bottom_nav.dart';
 
 class MainScreen extends StatefulWidget {

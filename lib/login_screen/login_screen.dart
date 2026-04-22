@@ -1,10 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:project_diu_swap/widgets/custom_textfield.dart';
 import 'package:project_diu_swap/widgets/customButton.dart';
 import 'package:project_diu_swap/widgets/password_input.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
@@ -23,7 +23,6 @@ class _LoginScreenState extends State<LoginScreen> {
     String email = _emailController.text.trim();
     String password = _passwordController.text.trim();
 
-    //empty check
     if (email.isEmpty || password.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Please fill all required fields")),
@@ -32,26 +31,39 @@ class _LoginScreenState extends State<LoginScreen> {
     }
 
     try {
-      
       setState(() {
         isLoading = true;
       });
-      //Firebase login
+
       UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
 
-      //check email verification
-      if (!userCredential.user!.emailVerified) {
-        await FirebaseAuth.instance.signOut();
+      if (!mounted) return;
+
+      User user = userCredential.user!;
+
+      await user.reload();
+      user = FirebaseAuth.instance.currentUser!;
+
+      if (!user.emailVerified) {
+        await user.sendEmailVerification();
 
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Please verify your email first!")),
+          SnackBar(
+            content: Text(
+              "Please verify your email. Verification link sent again.",
+            ),
+          ),
         );
+
+        await FirebaseAuth.instance.signOut();
         return;
       }
-      // Navigator.pushReplacementNamed(context, "/home");
+
+      Navigator.pushReplacementNamed(context, "/home");
     } on FirebaseAuthException catch (e) {
       if (!mounted) return;
+
       String message = "Login Failed";
 
       if (e.code == 'user-not-found') {
@@ -67,9 +79,45 @@ class _LoginScreenState extends State<LoginScreen> {
       ).showSnackBar(SnackBar(content: Text(message)));
     } finally {
       if (!mounted) return;
+
       setState(() {
         isLoading = false;
       });
+    }
+  }
+
+  Future<void> resetPassword() async {
+    String email = _emailController.text.trim();
+
+    if (email.isEmpty) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Enter your email first")));
+      return;
+    }
+
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Password reset email sent")));
+    } on FirebaseAuthException catch (e) {
+      if (!mounted) return;
+
+      String message = "error occured";
+
+      if (e.code == 'user-not-found') {
+        message = "No user found with this email";
+      } else if (e.code == 'invalid-email') {
+        message = "Invalid email";
+      }
+
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(message)));
     }
   }
 
@@ -90,9 +138,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Center(
-                      child: Image.asset('assets/images/logo.png', height: 200),
+                      child: Image.asset(
+                        'assets/images/just_logo.png',
+                        height: 90,
+                      ),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 40),
 
                     //*Email input
                     TextField(
@@ -123,7 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Align(
                       alignment: Alignment.centerRight,
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: resetPassword,
                         child: Text(
                           "Forget Password?",
                           style: TextStyle(color: Colors.green),
@@ -142,45 +193,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     SizedBox(height: 10),
 
-                    //*or
-                    // Align(
-                    //   alignment: Alignment.center,
-                    //   child: Text("or", style: TextStyle(fontSize: 20)),
-                    // ),
-
-                    // SizedBox(height: 10),
-
-                    //*Continue with google
-                    // SizedBox(
-                    //   height: 50,
-                    //   width: double.infinity,
-                    //   child: ElevatedButton(
-                    //     onPressed: () {},
-                    //     style: ElevatedButton.styleFrom(
-                    //       backgroundColor: Colors.black,
-                    //       foregroundColor: Colors.white,
-                    //       shape: RoundedRectangleBorder(
-                    //         borderRadius: BorderRadius.circular(10),
-                    //       ),
-                    //     ),
-                    //     child: Row(
-                    //       mainAxisAlignment: MainAxisAlignment.center,
-                    //       children: [
-                    //         Image.asset(
-                    //           "assets/images/google_logo.png",
-                    //           height: 20,
-                    //         ),
-
-                    //         SizedBox(width: 10),
-
-                    //         Text(
-                    //           "Continue with google",
-                    //           style: TextStyle(fontSize: 20),
-                    //         ),
-                    //       ],
-                    //     ),
-                    //   ),
-                    // ),
                     SizedBox(height: 10),
 
                     //Dont have an account Sign up

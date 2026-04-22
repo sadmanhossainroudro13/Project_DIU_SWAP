@@ -10,7 +10,8 @@ class MyPostCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.grey[300],
+      color: Colors.white,
+      shadowColor: Colors.black12,
       margin: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       elevation: 5,
@@ -74,8 +75,10 @@ class MyPostCard extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) =>
-                                EditPostScreen(post: post.data(), postId: post.id),
+                            builder: (_) => EditPostScreen(
+                              post: post.data(),
+                              postId: post.id,
+                            ),
                           ),
                         );
                       },

@@ -49,7 +49,7 @@ class _AddPostState extends State<AddPost> {
     int? price = int.tryParse(_priceController.text);
     String location = _locationController.text;
     String description = _descriptionController.text;
-    int? phoneNumber = int.tryParse(_phoneNumberController.text);
+    String phoneNumber = _phoneNumberController.text.trim();
 
     if (title.isEmpty ||
         location.isEmpty ||
