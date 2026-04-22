@@ -14,6 +14,7 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+  bool isAccepted = false;
   bool isLoading = false;
   bool isPasswordHidden = true;
   bool isConfirmHidden = true;
@@ -54,6 +55,13 @@ class _SignupScreenState extends State<SignupScreen> {
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text("Password does not match")));
+      return;
+    }
+
+    if (!isAccepted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("You must agree to Terms & Conditions")),
+      );
       return;
     }
 
@@ -163,6 +171,28 @@ class _SignupScreenState extends State<SignupScreen> {
                         isConfirmHidden = !isConfirmHidden;
                       });
                     },
+                  ),
+
+                  SizedBox(height: 10),
+
+                  Row(
+                    children: [
+                      Checkbox(
+                        value: isAccepted,
+                        onChanged: (value) {
+                          setState(() {
+                            isAccepted = value!;
+                          });
+                        },
+                      ),
+
+                      Expanded(
+                        child: Text(
+                          "I agree to the Terms & Conditions",
+                          style: TextStyle(fontSize: 14),
+                        ),
+                      ),
+                    ],
                   ),
 
                   SizedBox(height: 10),

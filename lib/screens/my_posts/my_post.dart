@@ -16,7 +16,10 @@ class _MyPostState extends State<MyPost> {
     final userId = FirebaseAuth.instance.currentUser!.uid;
     return Scaffold(
       appBar: AppBar(
-        title: Text("My Listing"),
+        title: Text(
+          "My Listing",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
         backgroundColor: Colors.black87,
         foregroundColor: Colors.white,

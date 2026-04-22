@@ -4,7 +4,7 @@ import 'package:project_diu_swap/screens/home/widgets/search_bar.dart';
 import 'package:project_diu_swap/widgets/bold_text.dart';
 import 'package:project_diu_swap/screens/home/widgets/categories_sort.dart';
 import 'package:project_diu_swap/screens/home/widgets/home_appbar.dart';
-import 'package:project_diu_swap/screens/home/widgets/latestListing_seeAll.dart';
+
 import 'package:project_diu_swap/screens/home/widgets/latest_listing_card.dart';
 
 class Homepage extends StatefulWidget {
@@ -39,12 +39,12 @@ class _HomepageState extends State<Homepage> {
                       },
                     ),
                   ),
-
-                  IconButton(onPressed: () {}, icon: Icon(Icons.filter_alt)),
                 ],
               ),
 
-              LatestlistingSeeall(str: "Categories"),
+              SizedBox(height: 10),
+
+              BoldText(str: "Categories", fontSize: 25),
 
               //Category Section
               CategoriesSort(
@@ -56,8 +56,10 @@ class _HomepageState extends State<Homepage> {
                 },
               ),
 
-              //Latest listing and see all
-              LatestlistingSeeall(str: "Latest Listing"),
+              SizedBox(height: 10),
+
+              //Latest listing
+              BoldText(str: "Latest Listing", fontSize: 25),
 
               //Latese Listing Card
               LatestListingCard(

@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:project_diu_swap/login_screen/login_screen.dart';
+import 'package:project_diu_swap/screens/login_screen/login_screen.dart';
 import 'package:project_diu_swap/screens/home/home_page.dart';
 import 'package:project_diu_swap/screens/main_screen.dart';
-import 'package:project_diu_swap/screens/signup_screen.dart';
+import 'package:project_diu_swap/screens/sign_up/signup_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

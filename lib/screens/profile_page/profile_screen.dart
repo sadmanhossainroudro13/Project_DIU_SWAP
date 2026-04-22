@@ -2,6 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:project_diu_swap/screens/main_screen.dart';
+import 'package:project_diu_swap/screens/profile_page/pages/contact_us.dart';
+import 'package:project_diu_swap/screens/profile_page/pages/privacy_policy.dart';
+import 'package:project_diu_swap/screens/profile_page/pages/terms_page.dart';
+import 'package:project_diu_swap/screens/profile_page/widgets/tile.dart';
 
 class ProfileScreen extends StatefulWidget {
   ProfileScreen({super.key});
@@ -24,7 +28,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       backgroundColor: Colors.grey[200],
 
       appBar: AppBar(
-        title: Text("Profile"),
+        title: Text("Profile", style: TextStyle(fontWeight: FontWeight.bold)),
         centerTitle: true,
         backgroundColor: Colors.black87,
         foregroundColor: Colors.white,
@@ -118,10 +122,42 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                     child: Column(
                       children: [
-                        _tile(Icons.contact_mail, "Contact Us", () {}),
-                        _tile(Icons.help_outline, "Get Help", () {}),
-                        _tile(Icons.privacy_tip, "Privacy Policy", () {}),
-                        _tile(Icons.description, "Terms & Conditions", () {}),
+                        CustomTile(
+                          chooseIcon: Icons.contact_mail,
+                          title: "Contact Us",
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => ContactUsScreen(),
+                              ),
+                            );
+                          },
+                        ),
+
+                        CustomTile(
+                          chooseIcon: Icons.privacy_tip,
+                          title: "Privacy Policy",
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => PrivacyPolicyScreen(),
+                              ),
+                            );
+                          },
+                        ),
+
+                        CustomTile(
+                          chooseIcon: Icons.description,
+                          title: "Terms & Conditions",
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (_) => TermsScreen()),
+                            );
+                          },
+                        ),
                       ],
                     ),
                   ),
@@ -151,16 +187,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
           );
         },
       ),
-    );
-  }
-
-  //  reusable tile
-  Widget _tile(IconData icon, String title, VoidCallback onTap) {
-    return ListTile(
-      leading: Icon(icon),
-      title: Text(title),
-      trailing: Icon(Icons.arrow_forward_ios, size: 16),
-      onTap: onTap,
     );
   }
 }

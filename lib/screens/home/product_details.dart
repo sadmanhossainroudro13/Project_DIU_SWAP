@@ -148,7 +148,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                         ],
                       ),
 
-                      //Favourite
+                      // //Favourite
                       // IconButton(
                       //   onPressed: () {
                       //     setState(() {
