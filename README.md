@@ -20,24 +20,17 @@ A mobile marketplace application built with Flutter that enables Daffodil Intern
 ---
 ## 📸 Screenshots
 
-### 🏠 Homepage
-![Homepage](assets/screenshots/homepage_ss.jpeg)
+<p align="center">
+  <img src="assets/screenshots/homepage_ss.jpeg" width="250"/>
+  <img src="assets/screenshots/editpost_ss.jpeg" width="250"/>
+  <img src="assets/screenshots/mmyListing_ss.jpeg" width="250"/>
+</p>
 
-### ➕ Add / Edit Post
-![Add Post](assets/screenshots/editpost_ss.jpeg)
-
-### 📋 My Listings
-![My Listings](assets/screenshots/mmyListing_ss.jpeg)
-
-### 👤 Profile
-![Profile](assets/screenshots/profile_ss.jpeg)
-
-### 🔐 Login
-![Login](assets/screenshots/login_ss.jpeg)
-
-### 📝 Sign Up
-![Sign Up](assets/screenshots/signUp_ss.jpeg)
-
+<p align="center">
+  <img src="assets/screenshots/profile_ss.jpeg" width="250"/>
+  <img src="assets/screenshots/login_ss.jpeg" width="250"/>
+  <img src="assets/screenshots/signUp_ss.jpeg" width="250"/>
+</p>
 ---
 
 ## 🛠 Tech Stack
