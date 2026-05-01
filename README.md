@@ -87,6 +87,3 @@ A mobile marketplace application built with Flutter that enables Daffodil Intern
 
 ---
 
-## 🔗 Project Link
-
-GitHub Repository: ADD_YOUR_GITHUB_LINK_HERE
