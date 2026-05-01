@@ -23,6 +23,7 @@ A mobile marketplace application built with Flutter that enables Daffodil Intern
 <p align="center">
   <img src="assets/screenshots/homepage_ss.jpeg" width="250"/>
   <img src="assets/screenshots/editpost_ss.jpeg" width="250"/>
+  <img src="assets/screenshots/upload_ss.jpeg" width="250"/>
   <img src="assets/screenshots/mmyListing_ss.jpeg" width="250"/>
 </p>
 
